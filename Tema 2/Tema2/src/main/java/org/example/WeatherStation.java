@@ -5,19 +5,17 @@ import java.time.LocalDate;
 
 public class WeatherStation {
     private ArrayList<Weather> history;
-    private double latitude;
-    private double longitude;
+    private Location location;
     private AlertSystem alertSystem;
-    public WeatherStation(double latitude, double longitude){
-        this.latitude = latitude;
-        this.longitude = longitude;
+    public WeatherStation(Location location){
+        this.location = location;
         this.history = new ArrayList<>();
         this.alertSystem = new AlertSystem();
     }
-    public void updateHistory(double temperature, double humidity, double pressure, double dewPoint){
+    public void updateHistory(double temperature, double humidity, double pressure, double dewPoint) throws InvalidInputException {
         Weather newWeather = new Weather(temperature, humidity, pressure, dewPoint, LocalDate.now());
         history.add(newWeather);
-        System.out.println("New weather input added for: " + newWeather + ", in the " + this.latitude + ", " + this.longitude + " weather station.");
+        System.out.println("New weather input added for: " + newWeather + ", in the " + this.location + " weather station.");
         alertSystem.checkConditions(newWeather);
     }
     public void weeklyAnalysis(){
@@ -44,7 +42,7 @@ public class WeatherStation {
             return;
         }
         double avgTemp = sum/count;
-        System.out.println("Location: " +  this.latitude + ", " + this.longitude);
+        System.out.println("Location: " + this.location);
         System.out.println("Average temperature: " + avgTemp);
         System.out.println("Minimum temperature: " + minTemp + ", maximum temperature: " + maxTemp);
 
@@ -54,7 +52,7 @@ public class WeatherStation {
             System.out.println("Not enough data for predicting the weather.");
             return;
         }
-        System.out.println("Weather prediction for weather station located in: " + this.latitude + ", " + this.longitude);
+        System.out.println("Weather prediction for weather station located in: " + this.location);
         Weather last = history.get(history.size()-1);
         Weather prev = history.get(history.size()-2);
         double pressureDiff = last.getPressure() - prev.getPressure();

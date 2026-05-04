@@ -2,29 +2,21 @@ package org.example;
 
 public class User {
     private String name;
-    private double longitude;
-    private double latitude;
-    public User(String name, double longitude, double latitude){
+    private Location location;
+    public User(String name, Location location){
         this.name = name;
-        this.longitude = longitude;
-        this.latitude = latitude;
+        this.location = location;
     }
     public String getName(){
         return name;
     }
-    public double getLongitude(){
-        return longitude;
-    }
-    public double getLatitude(){
-        return latitude;
-    }
     public void setName(String name){
         this.name = name;
     }
-    public void setLongitude(double longitude){
-        this.longitude = longitude;
+    public Location getLocation(){
+        return location;
     }
-    public void setLatitude(double latitude){
-        this.latitude = latitude;
+    public void setLocation(Location location){
+        this.location = location;
     }
 }

@@ -1,6 +1,6 @@
 package org.example;
 
-public class InvalidInputException extends RuntimeException {
+public class InvalidInputException extends Exception {
     public InvalidInputException(String message) {
         super(message);
     }
